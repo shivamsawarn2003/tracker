@@ -1,37 +1,42 @@
+// frontend/src/App.js
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
-import {useState, useEffect} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import Login from './Login'; // Assume you have a Login component
+import AuthContext, { AuthProvider } from './AuthContext';
 
-function App() {
-  const [transactionDate, setTransactionDate] = useState(""); // State to store the transaction date
-  const [description, setDescription] = useState(""); // State to store the transaction description
-  const [amount, setAmount] = useState(""); // State to store the transaction amount
-  const [transactions, setTransactions] = useState([]); // State to store the list of transactions
+const ExpenseTracker = () => {
+  const [transactionDate, setTransactionDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState("");
+  const [transactions, setTransactions] = useState([]);
+  const { authToken } = useContext(AuthContext);
 
-  // Function to fetch transactions from the backend when the component loads
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/transactions');
-        setTransactions(response.data); // Set the fetched transactions to the state
+        const response = await axios.get('http://localhost:5000/transactions', {
+          headers: { Authorization: `Bearer ${authToken}` }, // Pass the token in headers
+        });
+        setTransactions(response.data);
       } catch (err) {
         console.error("Error fetching transactions:", err);
       }
     };
     fetchTransactions();
-  }, []);
+  }, [authToken]);
 
-  // Function to handle form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic form validation
     if (!description || !amount || !transactionDate) {
       alert("Please fill in all the required fields");
       return;
     }
 
-    // Create a new transaction object
     const newTransaction = {
       description,
       amount,
@@ -39,13 +44,12 @@ function App() {
     };
 
     try {
-      // Send the POST request to the backend to save the transaction
-      await axios.post('http://localhost:5000/transactions', newTransaction);
+      await axios.post('http://localhost:5000/transactions', newTransaction, {
+        headers: { Authorization: `Bearer ${authToken}` }, // Pass the token in headers
+      });
 
-      // Add the new transaction to the transaction state array
       setTransactions([...transactions, newTransaction]);
 
-      // Clear the form fields after submission
       setDescription("");
       setAmount("");
       setTransactionDate("");
@@ -87,11 +91,9 @@ function App() {
         <button type="submit">Add new transaction</button>
       </form>
 
-      {/* Section to display the list of transactions */}
       <div className="transactions">
         {transactions.map((transaction, index) => (
           <div className="transaction" key={index}>
-            {/* Unique key for each transaction */}
             <div className="left">
               <div className="name">{transaction.description}</div>
               <div className="datetime">{transaction.transactionDate}</div>
@@ -103,6 +105,32 @@ function App() {
         ))}
       </div>
     </div>
+  );
+};
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const { authToken } = useContext(AuthContext);
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        authToken ? <Component {...props} /> : <Navigate to="/login" />
+      }
+    />
+  );
+};
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" component={Login} />
+          <PrivateRoute path="/tracker" component={ExpenseTracker} />
+          <Navigate from="/" to="/login" />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
