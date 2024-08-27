@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const PORT = 5000;
-
+const authRoutes=require('./authRoutes');
 // Middleware
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Parse JSON bodies from HTTP requests
@@ -49,6 +49,9 @@ app.post('/transactions', async (req, res) => {
     res.status(400).json({ message: err.message }); // Send error message if something goes wrong
   }
 });
+
+//Routes
+app.use('/api/auth',authRoutes);
 
 // Start the server
 app.listen(PORT, () => {

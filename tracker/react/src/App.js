@@ -121,6 +121,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 function App() {
+  
   return (
     <AuthProvider>
       <Router>
