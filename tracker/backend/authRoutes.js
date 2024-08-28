@@ -7,7 +7,7 @@ function auth(req,res,next){
     }
 
     try{
-        const decoded=jwt.verify(token,'your_jwt_secret');//replace with your secret
+        const decoded=jwt.verify(token,'377df94e4f43fe959fa8cf5af65aaadf1cbaa9b2e214bb4e0c165c257933ab81b11c1adbf5a6b4e7622253d2e7f1c440de86c8ba098a483cb9dc525eb7a8b9b6');//replace with your secret
         req.user=decorded.user;
         next();
 

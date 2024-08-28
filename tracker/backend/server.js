@@ -4,14 +4,18 @@ const cors = require('cors');
 const app = express();
 const PORT = 5000;
 const authRoutes=require('./authRoutes');
+
 // Middleware
+
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Parse JSON bodies from HTTP requests
 
 // Connect to MongoDB
+
 mongoose.connect('mongodb+srv://shivakvs2003:SOKWJZ3Blq5IlYeV@cluster0.gtatz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-  // Removed deprecated options
+  
 });
+console.log("mongoDB connected");
 
 // Define the schema for transactions
 const transactionSchema = new mongoose.Schema({

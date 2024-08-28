@@ -41,7 +41,7 @@ router.post('/register', [
 
     jwt.sign(
       payload,
-      'your_jwt_secret', // Replace with your secret
+      '377df94e4f43fe959fa8cf5af65aaadf1cbaa9b2e214bb4e0c165c257933ab81b11c1adbf5a6b4e7622253d2e7f1c440de86c8ba098a483cb9dc525eb7a8b9b6  ', // Replace with your secret
       { expiresIn: '1h' },
       (err, token) => {
         if (err) throw err;
@@ -86,7 +86,7 @@ router.post('/login', [
 
     jwt.sign(
       payload,
-      'your_jwt_secret', // Replace with your secret
+      '377df94e4f43fe959fa8cf5af65aaadf1cbaa9b2e214bb4e0c165c257933ab81b11c1adbf5a6b4e7622253d2e7f1c440de86c8ba098a483cb9dc525eb7a8b9b6', // Replace with your secret
       { expiresIn: '1h' },
       (err, token) => {
         if (err) throw err;

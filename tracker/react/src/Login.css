@@ -1,0 +1,54 @@
+/* Style for the Login form container */
+form {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+/* Style for the form heading */
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Style for input fields */
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Optional: Style for alert messages */
+.alert {
+    margin-top: 20px;
+    padding: 10px;
+    color: #d9534f;
+    background-color: #f2dede;
+    border-radius: 4px;
+    border: 1px solid #d9534f;
+}

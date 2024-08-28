@@ -1,5 +1,3 @@
-// frontend/src/App.js
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
@@ -108,27 +106,27 @@ const ExpenseTracker = () => {
   );
 };
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ children }) => {
   const { authToken } = useContext(AuthContext);
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        authToken ? <Component {...props} /> : <Navigate to="/login" />
-      }
-    />
-  );
+
+  return authToken ? children : <Navigate to="/login" />;
 };
 
 function App() {
-  
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/login" component={Login} />
-          <PrivateRoute path="/tracker" component={ExpenseTracker} />
-          <Navigate from="/" to="/login" />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/tracker"
+            element={
+              <PrivateRoute>
+                <ExpenseTracker />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>
     </AuthProvider>
