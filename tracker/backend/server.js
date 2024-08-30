@@ -2,20 +2,33 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
-const PORT = 5000;
-const authRoutes=require('./authRoutes');
+require('dotenv').config();
+require('./Models/userModel');
+const PORT = process.env.PORT || 5000;
+const AuthRouter=require('./Routes/AuthRouter');
+const mongo_uri=process.env.MONGO_URI;
 
 // Middleware
 
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Parse JSON bodies from HTTP requests
+app.use('/auth',AuthRouter);
+app.get('/ping',(req,res)=>{
+  res.send("PONG");
+});
 
 // Connect to MongoDB
 
-mongoose.connect('mongodb+srv://shivakvs2003:SOKWJZ3Blq5IlYeV@cluster0.gtatz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+const db2Connection=mongoose.createConnection(mongo_uri, {
   
 });
-console.log("mongoDB connected");
+db2Connection.on('connected',()=>{
+  console.log('Connected to the second database');
+});
+
+db2Connection.on('error',(err)=>{
+  console.error('Error connecting to the second database:',err);
+});
 
 // Define the schema for transactions
 const transactionSchema = new mongoose.Schema({
@@ -55,7 +68,12 @@ app.post('/transactions', async (req, res) => {
 });
 
 //Routes
-app.use('/api/auth',authRoutes);
+if(typeof AuthRouter==='function'){
+  app.use('/api/auth',AuthRouter);
+}else{
+  console.error('Authorization is not a valid middleware function.Check its import and export');
+}
+
 
 // Start the server
 app.listen(PORT, () => {
