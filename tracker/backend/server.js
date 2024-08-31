@@ -20,7 +20,8 @@ app.get('/ping',(req,res)=>{
 // Connect to MongoDB
 
 const db2Connection=mongoose.createConnection(mongo_uri, {
-  
+  serverSelectionTimeoutMS: 30000,
+    connectTimeoutMS: 30000,
 });
 db2Connection.on('connected',()=>{
   console.log('Connected to the second database');

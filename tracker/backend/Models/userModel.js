@@ -4,7 +4,8 @@ const bcrypt=require("bcryptjs");
 const mongo_url=process.env.MONGO_CONN;
 //mongodb+srv://shivam:Shivamkvs@cluster0.czaej.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 const db1Connection=mongoose.createConnection(mongo_url,{
-
+    serverSelectionTimeoutMS: 30000,
+    connectTimeoutMS: 30000,
 });
 db1Connection.on('connected',()=>{
     console.log('connected to the first database');
