@@ -3,33 +3,30 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 require('dotenv').config();
-require('./Models/userModel');
+require('./Models/userModel'); // Ensure this file is correct and exporting UserModel
 const PORT = process.env.PORT || 5000;
-const AuthRouter=require('./Routes/AuthRouter');
-const mongo_uri=process.env.MONGO_URI;
+const AuthRouter = require('./Routes/AuthRouter');
+const mongo_uri = process.env.MONGO_URI;
 
 // Middleware
-
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Parse JSON bodies from HTTP requests
-app.use('/auth',AuthRouter);
-app.get('/ping',(req,res)=>{
+app.use('/auth', AuthRouter);
+app.get('/ping', (req, res) => {
   res.send("PONG");
 });
 
 // Connect to MongoDB
-
-const db2Connection=mongoose.createConnection(mongo_uri, {
+mongoose.connect(mongo_uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
-    connectTimeoutMS: 30000,
-});
-db2Connection.on('connected',()=>{
-  console.log('Connected to the second database');
-});
-
-db2Connection.on('error',(err)=>{
-  console.error('Error connecting to the second database:',err);
-});
+})
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => {
+    console.error('Error connecting to MongoDB:', err);
+    process.exit(1); // Exit process with failure
+  });
 
 // Define the schema for transactions
 const transactionSchema = new mongoose.Schema({
@@ -53,7 +50,6 @@ app.get('/transactions', async (req, res) => {
 
 // Route to add a new transaction
 app.post('/transactions', async (req, res) => {
-  // Create a new transaction object using the Transaction model
   const newTransaction = new Transaction({
     description: req.body.description,
     amount: req.body.amount,
@@ -67,14 +63,6 @@ app.post('/transactions', async (req, res) => {
     res.status(400).json({ message: err.message }); // Send error message if something goes wrong
   }
 });
-
-//Routes
-if(typeof AuthRouter==='function'){
-  app.use('/api/auth',AuthRouter);
-}else{
-  console.error('Authorization is not a valid middleware function.Check its import and export');
-}
-
 
 // Start the server
 app.listen(PORT, () => {

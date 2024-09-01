@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 const bcrypt=require("bcryptjs");
-
+require('dotenv').config();
 const mongo_url=process.env.MONGO_CONN;
 //mongodb+srv://shivam:Shivamkvs@cluster0.czaej.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 const db1Connection=mongoose.createConnection(mongo_url,{
