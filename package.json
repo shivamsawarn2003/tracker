@@ -7,7 +7,7 @@
     "install:all": "npm install --workspaces",
     "start": "npm run start:frontend & npm run start:backend",
     "build:frontend": "npm run build --workspace react",
-    "build": "npm run build:frontend"
+    "build": "npm run build:frontend && npm run build:backend"
   },
   "repository": {
     "type": "git",
