@@ -1,0 +1,141 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #17181F;
+  color: #333;
+}
+
+.App {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #171717;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #1ca9c2;
+}
+
+h1 span {
+  font-size: 0.5em;
+}
+
+form {
+  margin-bottom: 30px;
+}
+
+.basic {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #222328;
+  border-radius: 5px;
+}
+
+input[type="database-local"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #222328;
+  border-radius: 5px;
+}
+
+.date-picker {
+  margin-bottom: 15px;
+}
+
+.date-picker label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1em;
+  color: #555;
+}
+
+.date-picker input[type="datetime-local"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1ca9c2;
+  color: #fff;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #06c4e6;
+}
+
+.transactions {
+  margin-top: 20px;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+
+.transaction .left {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction .name {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.transaction .description {
+  font-size: 0.9em;
+  color: #888;
+  margin-top: 5px;
+}
+
+.transaction .right {
+  text-align: right;
+}
+
+.transaction .price {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #e74c3c;
+}
+
+.transaction .datetime {
+  font-size: 0.8em;
+  color: #888;
+  margin-top: 5px;
+}
