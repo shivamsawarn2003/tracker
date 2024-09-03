@@ -1,15 +1,13 @@
 {
   "name": "tracker",
   "version": "1.0.0",
-  "private": true,  
+  "private": true,
   "description": "Monorepo for Tracker project including frontend and backend",
   "main": "index.js",
   "scripts": {
-    "install:all": "npm install --workspaces",          
+    "install:all": "npm install --workspaces",
     "start": "npm run start:frontend & npm run start:backend",
-    "build:frontend": "npm run build --workspace react",  
-    "build:backend": "npm run build --workspace backend",
- "build": "concurrently \"npm run build:frontend\" \"npm run build:backend\""
+    "build": "concurrently \"npm run build:frontend\" \"npm run build:backend\""
   },
   "repository": {
     "type": "git",
@@ -22,7 +20,10 @@
   },
   "homepage": "https://github.com/shivamsawarn2003/tracker#readme",
   "workspaces": [
-    "react",  
-    "backend" 
-  ]
+    "react",
+    "backend"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
