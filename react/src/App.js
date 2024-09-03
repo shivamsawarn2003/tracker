@@ -13,16 +13,7 @@ const PrivateRoute = ({ children }) => {
   return authToken ? children : <Navigate to="/login" />;
 };
 
-// IframeComponent to display the external URL
-const IframeComponent = () => {
-  return (
-    <iframe
-      src="https://tracker-cl7o.vercel.app/"
-      style={{ width: '100%', height: '100vh', border: 'none' }}
-      title="External App"
-    />
-  );
-};
+
 
 function App() {
   return (
@@ -39,9 +30,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          {/* Route to display the external URL */}
-          <Route path="/external" element={<IframeComponent />} />
-          {/* Redirect any other path to /login */}
+         
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>
