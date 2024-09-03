@@ -6,7 +6,6 @@ import Signup from './pages/Signup';
 import { AuthProvider } from './AuthContext'; // Ensure this path is correct
 import AuthContext from './AuthContext'; 
 import { useContext } from 'react';
-
 const PrivateRoute = ({ children }) => {
   const { authToken } = useContext(AuthContext);
 
