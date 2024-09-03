@@ -12,7 +12,7 @@ const mongo_uri = process.env.MONGO_URI;
 // Middleware
 app.use(cors(
   {
-    origin:["https://tracker-x4zj.vercel.app/login"],
+    origin:["https://tracker-x4zj.vercel.app"],
     methods:['POST','GET'],
     credentials:true
   }
