@@ -10,13 +10,7 @@ const TransactionRouter = require('./Routes/TransactionRouter');
 const mongo_uri = process.env.MONGO_URI;
 
 // Middleware
-app.use(cors(
-  {
-    origin:["https://main--expense-tracker-shivamkumar.netlify.app/"],
-    methods:['POST','GET'],
-    credentials:true
-  }
-)); // Enable Cross-Origin Resource Sharing
+app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Parse JSON bodies from HTTP requests
 
 // Routes
