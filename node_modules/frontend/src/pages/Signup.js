@@ -27,7 +27,7 @@ function Signup() {
             return handleError('name, email and password are required')
         }
         try {
-            const url = `https://tracker-4.onrender.com/auth/signup`;
+            const url = `https://tracker-5.onrender.com/auth/signup`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
