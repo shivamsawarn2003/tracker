@@ -39,12 +39,13 @@ function Login() {
             const { success, message, jwtToken, name, error } = result;
             if (success) {
                 handleSuccess(message);
-                localStorage.setItem('token', jwtToken);
+                localStorage.setItem('token', jwtToken);  // Ensure this works correctly
                 localStorage.setItem('loggedInUser', name);
                 setTimeout(() => {
-                    navigate('/home')
-                }, 1000)
-            } else if (error) {
+                    navigate('/home');
+                }, 1000);
+            }
+             else if (error) {
                 const details = error?.details[0].message;
                 handleError(details);
             } else if (!success) {
