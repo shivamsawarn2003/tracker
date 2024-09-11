@@ -74,7 +74,7 @@ function Home() {
 
   const fetchProducts = async () => {
     try {
-      const url = "https://deploy-mern-app-1-api.vercel.app/products";
+      const url = "https://tracker-5.onrender.com/products";
       const headers = {
         headers: {
           'Authorization': localStorage.getItem('token'),
