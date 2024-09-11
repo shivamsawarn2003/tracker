@@ -23,7 +23,7 @@ function Home() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get('https://tracker-3-5rem.onrender.com/transactions', {
+        const response = await axios.get('https://tracker-4.onrender.com/transactions', {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         setTransactions(response.data);
@@ -49,7 +49,7 @@ function Home() {
     };
 
     try {
-      await axios.post('https://tracker-3-5rem.onrender.com/transactions', newTransaction, {
+      await axios.post('https://tracker-4.onrender.com/transactions', newTransaction, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
