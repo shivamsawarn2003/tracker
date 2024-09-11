@@ -5,9 +5,8 @@
   "description": "Monorepo for Tracker project including frontend and backend",
   "scripts": {
     "install:all": "npm install --workspaces",
-    "start": "npm run start:frontend & npm run start:backend",
-    "build:frontend": "npm run build --workspace react",
-    "build": "npm run build:frontend && npm run build:backend"
+    "start": "concurrently \"npm run start --workspace=react\" \"npm run start --workspace=backend\"",
+    "build": "npm run build --workspace react"
   },
   "repository": {
     "type": "git",
