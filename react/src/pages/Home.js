@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../ThemeContext';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import AuthContext  from '../AuthContext'; // Ensure this path is correct
@@ -14,6 +15,7 @@ function Home() {
   const [transactions, setTransactions] = useState([]);
   const { authToken } = useContext(AuthContext);
   const navigate = useNavigate();
+  const {theme,toggleTheme}=useContext(ThemeContext);
 
   useEffect(() => {
     setLoggedInUser(localStorage.getItem('loggedInUser'));
@@ -73,6 +75,15 @@ function Home() {
 
   return (
     <div className="App">
+      <div className="toggle-button">
+        <div className={`toggle-switch ${theme === 'dark' ? 'dark' : ''}`}
+          onClick={toggleTheme}
+        >
+          <div className="toggle-thumb"></div>
+        </div>
+      </div>
+
+      <p>Current Theme: {theme === 'light' ? 'Light Mode' : 'Dark Mode'}</p>
       <h1>Welcome {loggedInUser}</h1>
       <button onClick={handleLogout}>Logout</button>
 
