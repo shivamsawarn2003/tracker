@@ -129,7 +129,6 @@ function Home() {
           </div>
         ))}
       </div>
-
       <ToastContainer />
     </div>
   );
